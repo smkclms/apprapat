@@ -5,25 +5,47 @@
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Login dan Daftar Hadir - Aplikasi Rapat</title>
   <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
   <style>
     body {
-      background-color: #f8f9fa;
+      background: linear-gradient(135deg, #e0f7fa, #fce4ec);
+      min-height: 100vh;
       padding-top: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
     }
-    .container {
-      max-width: 900px;
+    .card {
+      border: none;
+      border-radius: 16px;
+      box-shadow: 0 8px 20px rgba(0, 0, 0, 0.1);
+      transition: all 0.3s ease-in-out;
+      height: auto;
+       }
+    .card:hover {
+      transform: translateY(-2px);
+    }
+    h3 {
+      font-weight: 600;
+    }
+    .form-label {
+      font-weight: 500;
+    }
+    .btn {
+      font-weight: 500;
     }
   </style>
 </head>
 <body>
 
-<div class="container">
+<div class="container px-3">
+  <div class="row flex-column-reverse flex-lg-row g-4 align-items-stretch">
 
-  <div class="row">
     <!-- Form Login -->
-    <div class="col-md-5">
-      <div class="card p-4 mb-4">
-        <h3 class="mb-3">Login Aplikasi Rapat</h3>
+    <div class="col-lg-5">
+      <div class="card p-4">
+        <h3 class="mb-3 text-primary"><i class="bi bi-person-lock me-2"></i>Login Aplikasi Rapat</h3>
 
         <?php if($this->session->flashdata('error')): ?>
           <div class="alert alert-danger"><?php echo $this->session->flashdata('error'); ?></div>
@@ -36,17 +58,23 @@
           </div>
           <div class="mb-3">
             <label for="password" class="form-label">Password</label>
+            <div class="input-group">
             <input type="password" id="password" name="password" class="form-control" required />
+            <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+              <i class="bi bi-eye-slash" id="eyeIcon"></i>
+            </button>
+          </div>
+
           </div>
           <button type="submit" class="btn btn-primary w-100">Login</button>
         </form>
       </div>
     </div>
 
-    <!-- Daftar Hadir Tamu dan List Rapat -->
-    <div class="col-md-7">
+    <!-- Daftar Hadir & Jadwal -->
+    <div class="col-lg-7">
       <div class="card p-4 mb-4">
-        <h3 class="mb-3">Daftar Hadir Tamu</h3>
+        <h3 class="mb-3 text-success"><i class="bi bi-pencil-square me-2"></i>Daftar Hadir Tamu</h3>
 
         <?php if($this->session->flashdata('success')): ?>
           <div class="alert alert-success"><?php echo $this->session->flashdata('success'); ?></div>
@@ -56,7 +84,7 @@
 
         <form method="post" action="<?php echo site_url('daftarhadirtamu'); ?>">
           <div class="mb-3">
-            <label for="id_rapat">Pilih Rapat</label>
+            <label for="id_rapat" class="form-label">Pilih Rapat</label>
             <select name="id_rapat" id="id_rapat" class="form-select" required>
               <option value="">-- Pilih Rapat --</option>
               <?php foreach($rapat_list as $rapat): ?>
@@ -67,11 +95,11 @@
             </select>
           </div>
           <div class="mb-3">
-            <label for="nama">Nama</label>
+            <label for="nama" class="form-label">Nama</label>
             <input type="text" name="nama" id="nama" class="form-control" required />
           </div>
           <div class="mb-3">
-            <label for="instansi">Instansi</label>
+            <label for="instansi" class="form-label">Instansi</label>
             <input type="text" name="instansi" id="instansi" class="form-control" required />
           </div>
           <button type="submit" class="btn btn-success w-100">Kirim</button>
@@ -79,15 +107,16 @@
       </div>
 
       <div class="card p-4">
-        <h3 class="mb-3">Jadwal Rapat Mendatang</h3>
+        <h3 class="mb-3 text-info"><i class="bi bi-calendar3 me-2"></i>Jadwal Rapat Mendatang</h3>
         <?php if(count($rapat_list) == 0): ?>
           <p>Tidak ada rapat yang dijadwalkan.</p>
         <?php else: ?>
           <ul class="list-group">
-            <?php foreach($rapat_list as $rapat): ?>
+            <?php foreach(array_slice($rapat_list, 0, 4) as $rapat): ?>
               <li class="list-group-item">
                 <strong><?php echo htmlspecialchars($rapat->judul); ?></strong><br />
-                Tanggal: <?php echo $rapat->tanggal; ?> | Jam: <?php echo $rapat->jam_mulai; ?> - <?php echo isset($rapat->jam_selesai) && $rapat->jam_selesai != '' ? $rapat->jam_selesai : '-'; ?>
+                Tanggal: <?php echo $rapat->tanggal; ?> |
+                Jam: <?php echo $rapat->jam_mulai; ?> - <?php echo $rapat->jam_selesai ?: '-'; ?>
               </li>
             <?php endforeach; ?>
           </ul>
@@ -96,7 +125,21 @@
     </div>
   </div>
 </div>
-
 <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<script>
+  const togglePassword = document.getElementById("togglePassword");
+  const passwordField = document.getElementById("password");
+  const eyeIcon = document.getElementById("eyeIcon");
+
+  togglePassword.addEventListener("click", function () {
+    const type = passwordField.type === "password" ? "text" : "password";
+    passwordField.type = type;
+
+    // Ganti ikon
+    eyeIcon.classList.toggle("bi-eye");
+    eyeIcon.classList.toggle("bi-eye-slash");
+  });
+</script>
+
 </body>
 </html>
