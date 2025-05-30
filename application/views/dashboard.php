@@ -50,5 +50,5 @@
   </div>
 </div>
 
-<a href="<?php echo site_url('auth/logout'); ?>" class="btn btn-danger mt-3">Logout</a>
+<!-- <a href="<?php echo site_url('auth/logout'); ?>" class="btn btn-danger mt-3">Logout</a> -->
 
