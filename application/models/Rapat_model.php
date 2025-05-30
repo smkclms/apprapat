@@ -4,7 +4,7 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 class Rapat_model extends CI_Model {
 
     public function get_all() {
-        return $this->db->order_by('tanggal', 'DESC')->get('rapat')->result();
+        return $this->db->order_by('id_rapat', 'ASC')->get('rapat')->result();
     }
 
     public function get_by_id($id) {

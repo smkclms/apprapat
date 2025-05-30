@@ -1,4 +1,4 @@
-<?php $this->load->view('templates/header', ['title' => 'Profil Saya']); ?>
+
 
 <h3>Profil Saya</h3>
 
@@ -24,5 +24,3 @@
   <button type="submit" class="btn btn-primary">Simpan</button>
 </form>
 
-
-<?php $this->load->view('templates/footer'); ?>

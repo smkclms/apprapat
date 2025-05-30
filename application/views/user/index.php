@@ -32,5 +32,3 @@
     <?php endforeach; ?>
   </tbody>
 </table>
-
-<?php $this->load->view('templates/footer'); ?>

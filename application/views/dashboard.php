@@ -52,4 +52,3 @@
 
 <a href="<?php echo site_url('auth/logout'); ?>" class="btn btn-danger mt-3">Logout</a>
 
-<?php $this->load->view('templates/footer'); ?>

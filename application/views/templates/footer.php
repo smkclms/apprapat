@@ -1,21 +1,20 @@
-</div> <!-- end content -->
-
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
-
 <script>
+console.log('Toggle script loaded');
 document.addEventListener('DOMContentLoaded', function () {
-  var toggleBtn = document.getElementById('sidebarToggle');
-  var sidebar = document.getElementById('sidebar');
-  var content = document.getElementById('content');
+  const toggleBtn = document.getElementById('sidebarToggle');
+  const sidebar = document.getElementById('sidebar');
+  const content = document.getElementById('content');
 
-  if (toggleBtn && sidebar && content) {
-    toggleBtn.addEventListener('click', function () {
-      sidebar.classList.toggle('collapsed');
-      content.classList.toggle('expanded');
-    });
+  console.log({ toggleBtn, sidebar, content });
+
+  if (!toggleBtn || !sidebar || !content) {
+    console.warn('Elemen toggle tidak ditemukan', { toggleBtn, sidebar, content });
+    return;
   }
+
+  toggleBtn.addEventListener('click', function () {
+    sidebar.classList.toggle('collapsed');
+    content.classList.toggle('expanded');
+  });
 });
 </script>
-
-</body>
-</html>
