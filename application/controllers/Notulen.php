@@ -11,6 +11,7 @@ class Notulen extends MY_Controller {
     $this->load->model('DaftarHadir_model'); // Tambahkan ini
     $this->load->helper(['url', 'form']);
     $this->load->library('form_validation');
+    
 }
 
 
@@ -76,8 +77,40 @@ class Notulen extends MY_Controller {
         $this->session->set_flashdata('success', 'Notulen berhasil dihapus');
         redirect('notulen');
     }
-    public function cetak($id_rapat) {
-    $this->load->library('pdf'); // library TCPDF atau dompdf sesuai Anda
+//     public function cetak($id_rapat) {
+//     $this->load->library('pdf'); // library TCPDF atau dompdf sesuai Anda
+
+//     $rapat = $this->Rapat_model->get_rapat_detail($id_rapat);
+//     if (!$rapat) show_404();
+
+//     $notulen = $this->Notulen_model->get_by_rapat($id_rapat);
+//     $peserta = $this->DaftarHadir_model->get_peserta_by_rapat($id_rapat);
+//     $jumlah_hadir = $this->DaftarHadir_model->count_hadir_by_rapat($id_rapat);
+
+//     // Data tidak hadir bisa Anda input manual di form lain, atau set '-' sementara
+//     $tidak_hadir = '-'; 
+
+//     $data = [
+//         'rapat' => $rapat,
+//         'notulen' => $notulen,
+//         'peserta' => $peserta,
+//         'jumlah_hadir' => $jumlah_hadir,
+//         'tidak_hadir' => $tidak_hadir,
+//     ];
+
+//     $html = $this->load->view('notulen/cetak', $data, true);
+
+//     $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
+//     $pdf->SetTitle('Laporan Notulen Rapat');
+//     $pdf->SetMargins(15, 20, 15);
+//     $pdf->AddPage();
+//     $pdf->writeHTML($html, true, false, true, false, '');
+//     $pdf->Output('notulen_rapat_'.$id_rapat.'.pdf', 'I');
+// }
+// rubah metode cetak agar sesuai notulen yang dibuat oleh beberapa user
+public function cetak($id_rapat) {
+    $this->load->library('pdf'); // pastikan ini TCPDF
+    $this->load->helper('tanggal');
 
     $rapat = $this->Rapat_model->get_rapat_detail($id_rapat);
     if (!$rapat) show_404();
@@ -86,25 +119,26 @@ class Notulen extends MY_Controller {
     $peserta = $this->DaftarHadir_model->get_peserta_by_rapat($id_rapat);
     $jumlah_hadir = $this->DaftarHadir_model->count_hadir_by_rapat($id_rapat);
 
-    // Data tidak hadir bisa Anda input manual di form lain, atau set '-' sementara
-    $tidak_hadir = '-'; 
-
-    $data = [
-        'rapat' => $rapat,
-        'notulen' => $notulen,
-        'peserta' => $peserta,
-        'jumlah_hadir' => $jumlah_hadir,
-        'tidak_hadir' => $tidak_hadir,
-    ];
-
-    $html = $this->load->view('notulen/cetak', $data, true);
-
     $pdf = new Pdf('P', 'mm', 'A4', true, 'UTF-8', false);
     $pdf->SetTitle('Laporan Notulen Rapat');
     $pdf->SetMargins(15, 20, 15);
-    $pdf->AddPage();
-    $pdf->writeHTML($html, true, false, true, false, '');
+    $pdf->SetAutoPageBreak(true, 15);
+
+    foreach ($notulen as $n) {
+        $pdf->AddPage();
+
+        $data = [
+            'rapat' => $rapat,
+            'notulen' => $n, // kirim satu notulen
+            'peserta' => $peserta,
+            'jumlah_hadir' => $jumlah_hadir,
+        ];
+
+        // gunakan view per-notulen
+        $html = $this->load->view('notulen/cetak_per_notulen', $data, true);
+        $pdf->writeHTML($html, true, false, true, false, '');
+    }
+
     $pdf->Output('notulen_rapat_'.$id_rapat.'.pdf', 'I');
 }
-
 }
