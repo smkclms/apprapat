@@ -8,6 +8,8 @@ class Dashboard extends MY_Controller {
         $this->check_guru_or_siswa(); // guru dan siswa bisa akses
         $this->load->model('User_model');
         $this->load->model('Rapat_model');
+        $this->load->model('Log_aktivitas_model');
+
     }
 
     public function index() {
@@ -28,6 +30,12 @@ class Dashboard extends MY_Controller {
 
         $data['nama'] = $this->session->userdata('nama');
         $data['level'] = $this->session->userdata('level');
+
+        if ($data['level'] == 1) {
+        $data['recent_logs'] = $this->Log_aktivitas_model->get_recent_logs(5);
+    } else {
+        $data['recent_logs'] = [];
+    }
 
         $this->load->view('templates/header', ['title' => 'Dashboard']);
         $this->load->view('dashboard', $data);

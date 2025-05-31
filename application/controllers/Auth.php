@@ -45,6 +45,7 @@ class Auth extends CI_Controller {
             'logged_in' => TRUE
         ];
         $this->session->set_userdata($session_data);
+        log_activity('User login: ' . $user->username); // Log aktivitas login
         redirect('dashboard');
     } else {
         $this->session->set_flashdata('error', 'Username atau password salah');
@@ -54,6 +55,7 @@ class Auth extends CI_Controller {
 
 
     public function logout() {
+        log_activity('User logout: ' . $this->session->userdata('username'));
         $this->session->sess_destroy();
         redirect('auth/login');
     }

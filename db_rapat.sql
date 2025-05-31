@@ -1,3 +1,5 @@
+-- ada kolom yang saya tidak ikutkan, silahkan cari dan tambahkan sendiri untuk melengkapinya
+
 -- phpMyAdmin SQL Dump
 -- Custom Dump for Aplikasi Rapat (Sempurna & Lengkap)
 -- Generation Time: 2025-05-27 05:40:00
