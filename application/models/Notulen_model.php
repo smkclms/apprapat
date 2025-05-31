@@ -22,9 +22,10 @@ class Notulen_model extends CI_Model {
     public function delete($id) {
         return $this->db->delete('notulen', ['id_notulen' => $id]);
     }
-    public function get_all_with_user() {
-    $this->db->select('notulen.*, users.nama as nama_user');
+    public function get_all_with_rapat_and_user() {
+    $this->db->select('notulen.*, rapat.judul as judul_rapat, users.nama as nama_user');
     $this->db->from('notulen');
+    $this->db->join('rapat', 'notulen.id_rapat = rapat.id_rapat', 'left');
     $this->db->join('users', 'notulen.disusun_oleh = users.id_user', 'left');
     $this->db->order_by('notulen.waktu_input', 'DESC');
     return $this->db->get()->result();

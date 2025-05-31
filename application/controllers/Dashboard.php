@@ -5,7 +5,7 @@ class Dashboard extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->check_guru(); // hanya guru yang bisa akses dashboard ini
+        $this->check_guru_or_siswa(); // guru dan siswa bisa akses
         $this->load->model('User_model');
         $this->load->model('Rapat_model');
     }

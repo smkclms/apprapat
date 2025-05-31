@@ -5,7 +5,8 @@ class User extends MY_Controller {
 
     public function __construct() {
         parent::__construct();
-        $this->check_guru(); // hanya guru yang bisa akses
+        $this->check_guru_or_siswa(); // hanya guru yang bisa akses
+        $this->check_access([1, 2]); // izinkan guru dan siswa
         $this->load->model('User_model');
         $this->load->helper(['url', 'form']);
         $this->load->library('form_validation');

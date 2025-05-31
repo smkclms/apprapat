@@ -23,4 +23,7 @@
   </div>
   <button type="submit" class="btn btn-primary">Simpan</button>
 </form>
+<footer style="width: 100%; text-align: center; padding: 10px 0; font-size: 14px; color: #555; position: fixed; bottom: 0; left: 0; background: #f8f8f8;">
+  Dev: <a href="https://www.profilsaya.my.id" target="_blank" rel="noopener noreferrer">Muhamad_Nazmudin</a> @2025
+</footer>
 

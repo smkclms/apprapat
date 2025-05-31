@@ -11,7 +11,7 @@
 <table class="table table-bordered table-striped">
   <thead>
     <tr>
-      <th>ID Rapat</th>
+      <th>Judul Rapat</th>
       <th>Isi Notulen</th>
       <th>Disusun Oleh</th>
       <th>Waktu Input</th>
@@ -21,7 +21,7 @@
     <tbody>
   <?php foreach($notulen as $n): ?>
     <tr>
-      <td><?php echo $n->id_rapat; ?></td>
+      <td><?php echo $n->judul_rapat; ?></td>
       <!-- <td><?php echo nl2br(htmlspecialchars($n->isi_notulen)); ?></td> -->
        <!-- menggantin tampilan isi notulen hanya 200 karakter -->
         <td>
@@ -41,6 +41,9 @@
     </tr>
   <?php endforeach; ?>
 </tbody>
-
 </table>
+<footer style="width: 100%; text-align: center; padding: 10px 0; font-size: 14px; color: #555; position: fixed; bottom: 0; left: 0; background: #f8f8f8;">
+  Dev: <a href="https://www.profilsaya.my.id" target="_blank" rel="noopener noreferrer">Muhamad_Nazmudin</a> @2025
+</footer>
+
 

@@ -16,7 +16,7 @@ class Notulen extends MY_Controller {
 
 
     public function index() {
-    $data['notulen'] = $this->Notulen_model->get_all_with_user();
+    $data['notulen'] = $this->Notulen_model->get_all_with_rapat_and_user();
     $this->load->view('templates/header', ['title' => 'Daftar Notulen']);
     $this->load->view('notulen/index', $data);
     $this->load->view('templates/footer');

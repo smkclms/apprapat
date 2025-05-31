@@ -27,5 +27,12 @@ class MY_Controller extends CI_Controller {
             exit;
         }
     }
+protected function check_access($levels = array()) {
+    if (!in_array($this->user_level, $levels)) {
+        show_error('Anda tidak memiliki akses ke halaman ini.', 403, 'Akses Ditolak');
+        exit;
+    }
+}
+
 
 }
