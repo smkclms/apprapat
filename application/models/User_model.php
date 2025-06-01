@@ -36,4 +36,20 @@ class User_model extends CI_Model {
     public function delete_user($id) {
         return $this->db->delete('users', ['id_user' => $id]);
     }
+    // Hitung total user dengan role siswa (id_role = 2)
+public function count_all_siswa() {
+    $this->db->where('id_role', 2);
+    return $this->db->count_all_results('users');
+}
+
+// Ambil data siswa berdasarkan batasan halaman
+public function get_siswa_pagination($limit, $start) {
+    return $this->db
+        ->where('id_role', 2)
+        ->limit($limit, $start)
+        ->order_by('nama', 'ASC')
+        ->get('users')
+        ->result();
+}
+
 }

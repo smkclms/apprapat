@@ -1,28 +1,52 @@
 <?php $this->load->view('templates/header', ['title' => 'Tambah User']); ?>
 
-<h3>Tambah User Siswa</h3>
+<!-- Font Awesome untuk ikon -->
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
 
-<?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
+<div class="container mt-4">
+  <div class="card shadow-sm">
+    <div class="card-header bg-success text-white">
+      <h5 class="mb-0"><i class="fas fa-user-plus"></i> Tambah User Siswa</h5>
+    </div>
+    <div class="card-body">
 
-<form method="post" action="<?php echo site_url('user/tambah'); ?>">
-  <div class="mb-3">
-    <label>Nama</label>
-    <input type="text" name="nama" class="form-control" value="<?php echo set_value('nama'); ?>" required />
+      <?php echo validation_errors('<div class="alert alert-danger">', '</div>'); ?>
+
+      <form method="post" action="<?php echo site_url('user/tambah'); ?>">
+
+        <div class="form-group">
+          <label><i class="fas fa-user"></i> Nama</label>
+          <input type="text" name="nama" class="form-control" value="<?php echo set_value('nama'); ?>" required />
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-user-circle"></i> Username</label>
+          <input type="text" name="username" class="form-control" value="<?php echo set_value('username'); ?>" required />
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-lock"></i> Password</label>
+          <input type="password" name="password" class="form-control" required />
+        </div>
+
+        <div class="form-group">
+          <label><i class="fas fa-envelope"></i> Email</label>
+          <input type="email" name="email" class="form-control" value="<?php echo set_value('email'); ?>" />
+        </div>
+
+        <div class="form-group mt-3">
+          <button type="submit" class="btn btn-success">
+            <i class="fas fa-save"></i> Simpan
+          </button>
+          <a href="<?php echo site_url('user'); ?>" class="btn btn-secondary">
+            <i class="fas fa-arrow-left"></i> Batal
+          </a>
+        </div>
+
+      </form>
+
+    </div>
   </div>
-  <div class="mb-3">
-    <label>Username</label>
-    <input type="text" name="username" class="form-control" value="<?php echo set_value('username'); ?>" required />
-  </div>
-  <div class="mb-3">
-    <label>Password</label>
-    <input type="password" name="password" class="form-control" required />
-  </div>
-  <div class="mb-3">
-    <label>Email</label>
-    <input type="email" name="email" class="form-control" value="<?php echo set_value('email'); ?>" />
-  </div>
-  <button type="submit" class="btn btn-primary">Simpan</button>
-  <a href="<?php echo site_url('user'); ?>" class="btn btn-secondary">Batal</a>
-</form>
+</div>
 
 <?php $this->load->view('templates/footer'); ?>
