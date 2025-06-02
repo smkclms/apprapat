@@ -21,6 +21,11 @@
     <label>No. Telepon</label>
     <input type="text" name="no_telepon" class="form-control" value="<?php echo set_value('no_telepon', $user->no_telepon); ?>" />
   </div>
+  <div class="mb-3">
+  <label>Password Baru (kosongkan jika tidak ingin diubah)</label>
+  <input type="password" name="password" class="form-control" />
+</div>
+
   <button type="submit" class="btn btn-primary">Simpan</button>
 </form>
 <footer style="width: 100%; text-align: center; padding: 10px 0; font-size: 14px; color: #555; position: fixed; bottom: 0; left: 0; background: #f8f8f8;">

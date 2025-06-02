@@ -201,6 +201,13 @@
   </a>
 </li>
 <?php endif; ?>
+<?php if ($this->session->userdata('level') == 1): ?>
+<li>
+  <a href="<?php echo site_url('user/index_guru'); ?>" class="nav-link text-white">
+    <i class="bi bi-shield-lock me-2"></i> Manajemen Super Admin
+  </a>
+</li>
+<?php endif; ?>
 
     <li>
       <a href="<?php echo site_url('rapat'); ?>" class="nav-link">

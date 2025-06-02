@@ -27,7 +27,11 @@ class Profile extends MY_Controller {
                 'email' => $this->input->post('email'),
                 'no_telepon' => $this->input->post('no_telepon')
             ];
-            $this->User_model->update_user($id_user, $update_data);
+             $password = $this->input->post('password');
+    if (!empty($password)) {
+        $update_data['password'] = password_hash($password, PASSWORD_DEFAULT);
+    }
+            $this->User_model->update_user($this->session->userdata('id_user'), $update_data);
             $this->session->set_flashdata('success', 'Profil berhasil diperbarui');
             redirect('profile');
         }

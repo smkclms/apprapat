@@ -43,11 +43,14 @@
           <input type="text" name="pemimpin_rapat" class="form-control" value="<?php echo set_value('pemimpin_rapat', isset($rapat->pemimpin_rapat) ? $rapat->pemimpin_rapat : ''); ?>" />
         </div>
 
-        <div class="form-group">
+        <!-- <div class="form-group">
           <label><i class="fas fa-calendar-day"></i> Tanggal</label>
           <input type="text" name="tanggal" id="tanggal" class="form-control" value="<?php echo set_value('tanggal'); ?>" required />
+        </div> -->
+<div class="form-group">
+          <label><i class="fas fa-calendar-alt"></i> Tanggal</label>
+          <input type="date" name="tanggal" class="form-control" value="<?php echo set_value('tanggal'); ?>" required />
         </div>
-
         <div class="form-row">
           <div class="form-group col-md-6">
             <label><i class="fas fa-clock"></i> Jam Mulai</label>

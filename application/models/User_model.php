@@ -51,5 +51,10 @@ public function get_siswa_pagination($limit, $start) {
         ->get('users')
         ->result();
 }
+// fungsi menambahkan guru
+public function get_all_guru() {
+    return $this->db->where('id_role', 1)->get('users')->result();
+}
+
 
 }

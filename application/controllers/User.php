@@ -48,8 +48,6 @@ if ($per_page === NULL || $per_page === '') {
 if ($page === NULL || $page === '') {
     $page = 0;
 }
-
-
     $data['users'] = $this->User_model->get_siswa_pagination($per_page, $page);
     $data['pagination'] = $this->pagination->create_links();
     $data['per_page'] = $per_page; // dikirim ke view
@@ -58,8 +56,67 @@ if ($page === NULL || $page === '') {
     $this->load->view('user/index', $data);
     $this->load->view('templates/footer');
 }
+// menambahkan fungsi untuk menampilkan guru
+public function index_guru() {
+    $this->check_guru(); // hanya guru yang bisa akses
+    $data['users'] = $this->User_model->get_all_guru();
+    $this->load->view('templates/header', ['title' => 'Manajemen Super Admin']);
+    $this->load->view('user/index_guru', $data);
+    $this->load->view('templates/footer');
+}
+// Method untuk tambah user guru (super admin)
+public function tambah_guru() {
+    $this->form_validation->set_rules('nama', 'Nama', 'required');
+    $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
+    $this->form_validation->set_rules('password', 'Password', 'required|min_length[6]');
+    $this->form_validation->set_rules('email', 'Email', 'valid_email');
 
+    if ($this->form_validation->run() == FALSE) {
+        $this->load->view('templates/header', ['title' => 'Tambah Super Admin']);
+        $this->load->view('user/tambah_guru');
+        $this->load->view('templates/footer');
+    } else {
+        $data = [
+            'nama' => $this->input->post('nama'),
+            'username' => $this->input->post('username'),
+            'password' => password_hash($this->input->post('password'), PASSWORD_DEFAULT),
+            'email' => $this->input->post('email'),
+            'id_role' => 1, // set sebagai guru
+            'created_at' => date('Y-m-d H:i:s')
+        ];
+        $this->User_model->insert_user($data);
+        $this->session->set_flashdata('success', 'Super Admin berhasil ditambahkan');
+        redirect('user/index_guru');
+    }
+}
 
+// Method untuk edit user guru (super admin)
+public function edit_guru($id) {
+    $data['user'] = $this->User_model->get_user_by_id($id);
+    if (!$data['user']) show_404();
+
+    $this->form_validation->set_rules('nama', 'Nama', 'required');
+    $this->form_validation->set_rules('email', 'Email', 'valid_email');
+
+    if ($this->form_validation->run() == FALSE) {
+        $this->load->view('templates/header', ['title' => 'Edit Super Admin']);
+        $this->load->view('user/edit_guru', $data);
+        $this->load->view('templates/footer');
+    } else {
+        $update_data = [
+            'nama' => $this->input->post('nama'),
+            'email' => $this->input->post('email')
+        ];
+        $password = $this->input->post('password');
+        if (!empty($password)) {
+            $update_data['password'] = password_hash($password, PASSWORD_DEFAULT);
+        }
+        $this->User_model->update_user($id, $update_data);
+        $this->session->set_flashdata('success', 'Super Admin berhasil diperbarui');
+        redirect('user/index_guru');
+    }
+}
+// dibawah ini function untuk tambah user siswa
     public function tambah() {
         $this->form_validation->set_rules('nama', 'Nama', 'required');
         $this->form_validation->set_rules('username', 'Username', 'required|is_unique[users.username]');
