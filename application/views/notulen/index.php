@@ -30,8 +30,7 @@
     echo nl2br(htmlspecialchars(mb_strimwidth($isi, 0, 100, '...')));
   ?>
 </td>
-
-      <td><?php echo htmlspecialchars($n->nama_user); ?></td>
+      <td><?php echo htmlspecialchars($n->penyusun); ?></td>
       <td><?php echo $n->waktu_input; ?></td>
       <td>
         <a href="<?php echo site_url('notulen/cetak/'.$n->id_rapat); ?>" target="_blank" class="btn btn-sm btn-info">Cetak</a>

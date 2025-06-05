@@ -15,13 +15,24 @@ class Notulen extends MY_Controller {
 }
 
 
-
     public function index() {
-    $data['notulen'] = $this->Notulen_model->get_all_with_rapat_and_user();
+    $user_level = $this->session->userdata('level');
+    $user_id = $this->session->userdata('id_user');
+
+    if ($user_level == 1) { // guru
+        $data['notulen'] = $this->Notulen_model->get_all_with_authors();
+    } elseif ($user_level == 2) { // siswa
+        $data['notulen'] = $this->Notulen_model->get_by_user($user_id);
+    } else {
+        $data['notulen'] = [];
+    }
+// print_r($data['notulen']);
+// exit;
     $this->load->view('templates/header', ['title' => 'Daftar Notulen']);
     $this->load->view('notulen/index', $data);
     $this->load->view('templates/footer');
 }
+
 
 
     public function tambah() {
