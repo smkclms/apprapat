@@ -15,7 +15,7 @@
 <div class="container mt-4">
   <div class="card shadow-sm">
     <div class="card-header bg-primary text-white">
-      <h5 class="mb-0"><i class="fas fa-calendar-plus"></i> Tambah Rapat</h5>
+      <h5 class="mb-0"><i class="bi bi-calendar-plus"></i> Tambah Rapat</h5>
     </div>
     <div class="card-body">
 
@@ -24,22 +24,22 @@
       <form method="post" action="<?php echo site_url('rapat/tambah'); ?>">
 
         <div class="form-group">
-          <label><i class="fas fa-heading"></i> Judul</label>
+          <label><i class="bi bi-type"></i> Judul</label>
           <input type="text" name="judul" class="form-control" value="<?php echo set_value('judul'); ?>" required />
         </div>
 
         <div class="form-group">
-          <label><i class="fas fa-align-left"></i> Agenda</label>
+          <label><i class="bi bi-text-left"></i> Agenda</label>
           <textarea name="agenda" class="form-control" rows="3" required><?php echo set_value('agenda'); ?></textarea>
         </div>
 
         <div class="form-group">
-          <label><i class="fas fa-map-marker-alt"></i> Tempat</label>
+          <label><i class="bi bi-geo-alt"></i> Tempat</label>
           <input type="text" name="tempat" class="form-control" value="<?php echo set_value('tempat', isset($rapat->tempat) ? $rapat->tempat : ''); ?>" />
         </div>
 
         <div class="form-group">
-          <label><i class="fas fa-user-tie"></i> Pemimpin Rapat</label>
+          <label><i class="bi bi-person-badge"></i> Pemimpin Rapat</label>
           <input type="text" name="pemimpin_rapat" class="form-control" value="<?php echo set_value('pemimpin_rapat', isset($rapat->pemimpin_rapat) ? $rapat->pemimpin_rapat : ''); ?>" />
         </div>
 
@@ -48,23 +48,23 @@
           <input type="text" name="tanggal" id="tanggal" class="form-control" value="<?php echo set_value('tanggal'); ?>" required />
         </div> -->
 <div class="form-group">
-          <label><i class="fas fa-calendar-alt"></i> Tanggal</label>
+          <label><i class="bi bi-calendar"></i> Tanggal</label>
           <input type="date" name="tanggal" class="form-control" value="<?php echo set_value('tanggal'); ?>" required />
         </div>
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label><i class="fas fa-clock"></i> Jam Mulai</label>
+            <label><i class="bi bi-clock"></i> Jam Mulai</label>
             <input type="text" id="jam_mulai" name="jam_mulai" class="form-control" value="<?php echo set_value('jam_mulai'); ?>" required />
           </div>
           <div class="form-group col-md-6">
-            <label><i class="fas fa-clock"></i> Jam Selesai</label>
+            <label><i class="bi bi-clock"></i> Jam Selesai</label>
             <input type="text" id="jam_selesai" name="jam_selesai" class="form-control" value="<?php echo set_value('jam_selesai'); ?>" />
           </div>
         </div>
 
         <div class="form-group mt-3">
-          <button type="submit" class="btn btn-success"><i class="fas fa-save"></i> Simpan</button>
-          <a href="<?php echo site_url('rapat'); ?>" class="btn btn-secondary"><i class="fas fa-arrow-left"></i> Batal</a>
+          <button type="submit" class="btn btn-success"><i class="bi bi-save"></i> Simpan</button>
+          <a href="<?php echo site_url('rapat'); ?>" class="btn btn-secondary"><i class="bi bi-arrow-left"></i> Batal</a>
         </div>
 
       </form>
@@ -73,7 +73,9 @@
 </div>
 
 <!-- Font Awesome -->
-<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+<!-- <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script> -->
+<link rel="stylesheet" href="<?= base_url('assets/css/fontawesome.min.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/solid.min.css') ?>">
 
 <script>
   $(document).ready(function(){

@@ -1,6 +1,10 @@
 
 <!-- Bootstrap Icons CDN -->
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css">
+<!-- <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css"> -->
+ <!-- JS -->
+  <link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/bootstrap-icons.css') ?>">
+<script src="<?= base_url('assets/js/bootstrap.bundle.min.js') ?>"></script>
 <style>
   .card:hover {
     transform: translateY(-4px);

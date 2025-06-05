@@ -4,9 +4,12 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1" />
   <title>Login dan Daftar Hadir - Aplikasi Rapat</title>
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
+  <!-- <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet" />
   <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
-  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" />
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.10.5/font/bootstrap-icons.css" rel="stylesheet" /> -->
+  <!-- Ganti ke lokal -->
+<link rel="stylesheet" href="<?= base_url('assets/css/bootstrap.min.css') ?>">
+<link rel="stylesheet" href="<?= base_url('assets/css/bootstrap-icons.css') ?>">
   <style>
     body {
       background: linear-gradient(135deg, #e0f7fa, #fce4ec);
@@ -23,6 +26,7 @@
       transition: all 0.3s ease-in-out;
       height: auto;
        }
+       
     .card:hover {
       transform: translateY(-2px);
     }
@@ -35,15 +39,49 @@
     .btn {
       font-weight: 500;
     }
+    .container {
+  padding-bottom: 100px; /* atau lebih besar dari tinggi footer */
+}
+
   </style>
 </head>
 <body>
 
 <div class="container px-3">
-  <div class="row flex-column-reverse flex-lg-row g-4 align-items-stretch">
+  <div class="row flex-column flex-lg-row g-4 align-items-stretch justify-content-center">
 
-    <!-- Form Login -->
-    <div class="col-lg-5">
+<!-- FORM LOGIN AGAR MUNCUL STRIP - UNTUK MEMPERKECIL LAYOUT -->
+ <div class="card p-4 mx-auto" style="max-width: 500px;">
+  <div class="d-flex justify-content-between align-items-center mb-3">
+    <h3 class="text-primary mb-0">
+      <i class="bi bi-person-lock me-2"></i>Login Aplikasi Rapat
+    </h3>
+    <button class="btn btn-sm btn-outline-secondary" data-bs-toggle="collapse" data-bs-target="#loginForm" aria-expanded="true" aria-controls="loginForm">
+      <i class="bi bi-dash"></i>
+    </button>
+  </div>
+
+  <div class="collapse show" id="loginForm">
+    <form method="post" action="<?php echo site_url('auth/do_login'); ?>">
+      <div class="mb-3">
+        <label for="username" class="form-label">Username</label>
+        <input type="text" id="username" name="username" class="form-control" required autofocus />
+      </div>
+      <div class="mb-3">
+        <label for="password" class="form-label">Password</label>
+        <div class="input-group">
+          <input type="password" id="password" name="password" class="form-control" required />
+          <button class="btn btn-outline-secondary" type="button" id="togglePassword">
+            <i class="bi bi-eye-slash" id="eyeIcon"></i>
+          </button>
+        </div>
+      </div>
+      <button type="submit" class="btn btn-primary w-100">Login</button>
+    </form>
+  </div>
+</div>
+    <!-- Form Login NORMAL-->
+    <!-- <div class="col-lg-5">
       <div class="card p-4">
         <h3 class="mb-3 text-primary"><i class="bi bi-person-lock me-2"></i>Login Aplikasi Rapat</h3>
 
@@ -69,7 +107,7 @@
           <button type="submit" class="btn btn-primary w-100">Login</button>
         </form>
       </div>
-    </div>
+    </div> -->
 
     <!-- Daftar Hadir & Jadwal -->
     <div class="col-lg-7">
@@ -129,7 +167,9 @@
   Dev: <a href="https://www.profilsaya.my.id" target="_blank" rel="noopener noreferrer">Muhamad_Nazmudin</a> @2025
 </footer>
 
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+<!-- <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script> -->
+<!-- JS local -->
+<script src="<?= base_url('assets/js/bootstrap.bundle.min.js') ?>"></script>
 <script>
   const togglePassword = document.getElementById("togglePassword");
   const passwordField = document.getElementById("password");
